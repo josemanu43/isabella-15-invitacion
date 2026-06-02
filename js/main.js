@@ -1,21 +1,76 @@
 /* ===================================================== */
-/* 1. PRELOADER & HERO ANIMATIONS (GSAP) */
+/* 1. PANTALLA DE BIENVENIDA Y AUDIO (NUEVO) */
+/* ===================================================== */
+
+const welcomeOverlay = document.getElementById("welcomeOverlay");
+const openInviteBtn = document.getElementById("openInvite");
+const bgMusic = document.getElementById("bgMusic");
+const musicBtn = document.getElementById("musicBtn");
+
+// Bloquear el scroll inicialmente
+document.body.classList.add("no-scroll");
+
+if (openInviteBtn) {
+  openInviteBtn.addEventListener("click", () => {
+    
+    // 1. Iniciar la música
+    if (bgMusic) {
+      bgMusic.volume = 0.6; // Volumen al 60% para que no sature
+      bgMusic.play().catch(error => console.log("Autoplay bloqueado por el navegador", error));
+    }
+
+    // 2. Ocultar la pantalla de bienvenida
+    if (welcomeOverlay) {
+      welcomeOverlay.classList.add("hidden");
+    }
+
+    // 3. Restaurar el scroll de la página
+    document.body.classList.remove("no-scroll");
+
+    // 4. Mostrar botón flotante animado
+    if (musicBtn) {
+      musicBtn.classList.add("visible", "playing");
+    }
+
+    // 5. Iniciar las animaciones del texto principal (Hero)
+    iniciarAnimacionesHero();
+  });
+}
+
+// Lógica del botón flotante (Pausar / Reproducir)
+if (musicBtn) {
+  musicBtn.addEventListener("click", () => {
+    if (bgMusic.paused) {
+      bgMusic.play();
+      musicBtn.classList.add("playing");
+    } else {
+      bgMusic.pause();
+      musicBtn.classList.remove("playing");
+    }
+  });
+}
+
+
+/* ===================================================== */
+/* 2. PRELOADER & HERO ANIMATIONS (GSAP) */
 /* ===================================================== */
 
 window.addEventListener("load", () => {
-  const tl = gsap.timeline();
-
-  // 1. Ocultar el preloader
-  tl.to(".luxury-preloader", {
-    autoAlpha: 0, // opacity 0 y visibility hidden
+  // Solo ocultamos el preloader inicial al cargar la página
+  gsap.to(".luxury-preloader", {
+    autoAlpha: 0,
     duration: 1,
     ease: "power2.inOut",
-  })
-  // 2. Animar los elementos del Hero
-  .fromTo(".hero-subtitle", 
+  });
+});
+
+// Esta función ahora se llama ÚNICAMENTE cuando el usuario hace clic en "Abrir Invitación"
+function iniciarAnimacionesHero() {
+  const tl = gsap.timeline();
+
+  tl.fromTo(".hero-subtitle", 
     { y: 30, autoAlpha: 0 },
-    { y: 0, autoAlpha: 1, duration: 1, ease: "power3.out" },
-    "-=0.2"
+    { y: 0, autoAlpha: 1, duration: 1, ease: "power3.out" }
   )
   .fromTo(".hero-title",
     { y: 50, autoAlpha: 0 },
@@ -42,14 +97,15 @@ window.addEventListener("load", () => {
     { y: 0, autoAlpha: 1, duration: 1, ease: "power2.out" },
     "-=0.3"
   );
-});
+}
+
 
 /* ===================================================== */
-/* 2. CUENTA REGRESIVA */
+/* 3. CUENTA REGRESIVA */
 /* ===================================================== */
 
-// Fecha del evento: 15 de Agosto a las 7:00 PM (Ajusta el año si es necesario)
-const eventDate = new Date("2026-08-15T19:00:00").getTime();
+// Fecha del evento: 15 de Agosto a las 7:30 PM
+const eventDate = new Date("2026-08-15T19:30:00").getTime();
 
 const daysEl = document.getElementById("days");
 const hoursEl = document.getElementById("hours");
@@ -94,8 +150,9 @@ function formatTime(time) {
 updateCountdown();
 setInterval(updateCountdown, 1000);
 
+
 /* ===================================================== */
-/* 3. MODAL CÓDIGO DE VESTIMENTA */
+/* 4. MODAL CÓDIGO DE VESTIMENTA */
 /* ===================================================== */
 
 const dresscodeBtn = document.getElementById("dresscodeBtn");
@@ -106,14 +163,14 @@ const closeModal = document.getElementById("closeModal");
 if (dresscodeBtn) {
   dresscodeBtn.addEventListener("click", () => {
     dresscodeModal.classList.add("active");
-    document.body.style.overflow = "hidden"; // Bloquear scroll de la página
+    document.body.classList.add("no-scroll"); // Bloquear scroll
   });
 }
 
 // Cerrar modal
 function closeDresscodeModal() {
   dresscodeModal.classList.remove("active");
-  document.body.style.overflow = "auto"; // Restaurar scroll
+  document.body.classList.remove("no-scroll"); // Restaurar scroll
 }
 
 if (closeModal) {
@@ -136,8 +193,9 @@ document.addEventListener("keydown", (e) => {
   }
 });
 
+
 /* ===================================================== */
-/* 4. ANIMACIONES AL HACER SCROLL (INTERSECTION OBSERVER) */
+/* 5. ANIMACIONES AL HACER SCROLL (INTERSECTION OBSERVER) */
 /* ===================================================== */
 
 const animatedElements = document.querySelectorAll(".fade-up, .fade-left, .fade-right");
@@ -179,8 +237,9 @@ const observer = new IntersectionObserver((entries) => {
 
 animatedElements.forEach((el) => observer.observe(el));
 
+
 /* ===================================================== */
-/* 5. EFECTO PARALLAX SUAVE (HERO & IMÁGENES) */
+/* 6. EFECTO PARALLAX SUAVE (HERO & IMÁGENES) */
 /* ===================================================== */
 
 const parallaxElements = document.querySelectorAll(".parallax-bg");
@@ -188,7 +247,6 @@ const parallaxElements = document.querySelectorAll(".parallax-bg");
 window.addEventListener("scroll", () => {
   const scrollY = window.scrollY;
   
-  // Parallax exclusivo para móviles y escritorio (animación fluida)
   requestAnimationFrame(() => {
     parallaxElements.forEach((el) => {
       // Movimiento muy sutil hacia abajo mientras se hace scroll
@@ -197,8 +255,9 @@ window.addEventListener("scroll", () => {
   });
 });
 
+
 /* ===================================================== */
-/* 6. SCROLL SUAVE LINKS INTERNOS */
+/* 7. SCROLL SUAVE LINKS INTERNOS */
 /* ===================================================== */
 
 const internalLinks = document.querySelectorAll('a[href^="#"]');
@@ -219,7 +278,8 @@ internalLinks.forEach((link) => {
   });
 });
 
+
 /* ===================================================== */
-/* 7. CONSOLA */
+/* 8. CONSOLA */
 /* ===================================================== */
 console.log("✨ Experiencia Luxury Isabella cargada correctamente ✨");

@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <meta name="theme-color" content="#261933" />
   
-  <title>Isabella Guiso Goez | Mis XV Años</title>
+  <title>Isabella Guisao Goez | Mis XV Años</title>
 
   <!-- ========================================= -->
   <!-- GOOGLE FONTS -->
@@ -27,7 +27,34 @@
 
 <body>
   <!-- ========================================= -->
-  <!-- PRELOADER ELEGANTE (Opcional visualmente) -->
+  <!-- PANTALLA DE BIENVENIDA (MÚSICA Y ENTRADA) -->
+  <!-- ========================================= -->
+  <div id="welcomeOverlay" class="welcome-overlay">
+    <div class="welcome-content">
+      <span class="section-tag" style="color: var(--white); border-color: rgba(255,255,255,0.3);">Mis XV Años</span>
+      <h1 class="welcome-title">Isabella</h1>
+      <button id="openInvite" class="luxury-btn-solid">
+        <span>Abrir Invitación</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- ========================================= -->
+  <!-- AUDIO INCORPORADO -->
+  <!-- ========================================= -->
+  <audio id="bgMusic" loop>
+    <source src="audio/a-thousand-years.mp3" type="audio/mpeg">
+  </audio>
+
+  <!-- ========================================= -->
+  <!-- BOTÓN DE MÚSICA FLOTANTE -->
+  <!-- ========================================= -->
+  <button id="musicBtn" class="music-btn-floating">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 18V5l12-2v13"></path><circle cx="6" cy="18" r="3"></circle><circle cx="18" cy="16" r="3"></circle></svg>
+  </button>
+
+  <!-- ========================================= -->
+  <!-- PRELOADER ELEGANTE -->
   <!-- ========================================= -->
   <div class="luxury-preloader">
     <span class="preloader-text">Isabella</span>
@@ -65,19 +92,42 @@
   </header>
 
   <!-- ========================================= -->
-  <!-- FRASE PRINCIPAL & EDITORIAL LAYOUT -->
+  <!-- HISTORIA Y PADRES (FRASES SECUENCIALES) -->
   <!-- ========================================= -->
-  <section class="editorial-section" id="quote">
-    <div class="container editorial-grid">
-      <div class="editorial-text-box fade-right">
+  <section class="story-section" id="quote" style="padding-top: 120px; padding-bottom: 120px;">
+    <div class="container">
+      
+      <!-- Frase 1 -->
+      <div class="text-center fade-up">
         <p class="poetic-text">
-          “Hoy dejo atrás una etapa maravillosa de mi vida para abrir las puertas a nuevos sueños, nuevas ilusiones y momentos inolvidables.”
+          “Hace 15 años nació una hermosa niña, enviada por Dios para ser criada y formada como el más grande tesoro.”
         </p>
       </div>
-      <div class="editorial-image-box fade-left">
-        <!-- Uso de imagen vertical estándar -->
-        <img src="images/portada.jpg" alt="Isabella Retrato" class="cinematic-img" loading="lazy" />
+
+      <!-- Separador Decorativo -->
+      <div class="divider fade-up"></div>
+
+      <!-- Frase 2 -->
+      <div class="text-center fade-up">
+        <p class="poetic-text" style="font-size: 2.5rem;">
+          “Hay momentos en la vida que imaginamos, soñamos y esperamos.<br>Uno de esos momentos ha llegado.”
+        </p>
       </div>
+
+      <!-- Imagen Intermedia (scroll2.jpg) AUMENTADA DE TAMAÑO -->
+      <div class="editorial-image-center fade-up" style="margin: 80px auto; text-align: center;">
+        <img src="images/scroll2.jpg" alt="Isabella Momentos" class="cinematic-img" style="border-radius: 20px; max-width: 550px; margin: 0 auto; width: 100%; object-fit: cover;" loading="lazy" />
+      </div>
+
+      <!-- Padres y Frase 3 -->
+      <div class="parents-block text-center fade-up">
+        <span class="section-tag" style="margin: 0 auto 20px auto;">Padres</span>
+        <h3 class="poetic-text" style="font-size: 4rem; margin-bottom: 25px; color: var(--purple-dark);">Liliana y Luis</h3>
+        <p class="poetic-text" style="font-size: 2.2rem;">
+          “Tenemos el gusto de invitarlos a celebrar los 15 años de nuestra hija.”
+        </p>
+      </div>
+
     </div>
   </section>
 
@@ -123,7 +173,7 @@
       <div class="details-editorial-wrapper">
         <!-- Columna de Imagen Larga (9:16) -->
         <div class="details-image fade-right">
-          <img src="images/portada2.jpg" alt="Detalle Isabella" class="cinematic-img" loading="lazy" />
+          <img src="images/scroll.jpg" alt="Detalle Isabella" class="cinematic-img" loading="lazy" />
         </div>
 
         <!-- Columna de Información -->
@@ -133,10 +183,10 @@
           
           <div class="info-block">
             <h3 class="info-title">Cuándo</h3>
-            <p class="info-text">Sábado, 15 de Agosto<br>7:00 PM</p>
+            <p class="info-text">Sábado, 15 de Agosto<br>7:30 PM</p>
           </div>
 
-          <div class="info-block">
+          <div class="info-block" style="border-bottom: none; padding-bottom: 0;">
             <h3 class="info-title">Dónde</h3>
             <p class="info-text"><strong>San Joaquin Eventos</strong><br>(Sede San Juan)<br>Cl 44A #72-41</p>
             <a href="https://maps.app.goo.gl/m18ahSG4eFsohpZH6?g_st=iw" target="_blank" class="luxury-link-btn">
@@ -146,6 +196,23 @@
           </div>
         </div>
       </div>
+    </div>
+  </section>
+
+  <!-- ========================================= -->
+  <!-- SECCIÓN DE REGALOS (CASTILLO.PNG) -->
+  <!-- ========================================= -->
+  <section class="gifts-section" style="padding: 60px 0 100px 0; text-align: center;">
+    <div class="container">
+      <div class="gift-image-wrapper fade-up" style="margin-bottom: 40px;">
+        <img src="images/castillo.png" alt="Sugerencia de Regalos" style="width: 100%; max-width: 900px; border-radius: 20px; box-shadow: var(--shadow-elegant); object-fit: cover;" loading="lazy" />
+      </div>
+      
+      <span class="section-tag fade-up" style="margin: 0 auto 15px auto;">Sugerencia de Regalos</span>
+      <h2 class="section-title fade-up" style="font-size: 2.8rem; margin-bottom: 15px;">Lluvia de Sobres ✉️</h2>
+      <p class="info-text fade-up" style="max-width: 600px; margin: 0 auto;">
+        El mejor regalo es tu presencia.<br>Pero si deseas tener un detalle conmigo, puedes hacerlo a través de un sobre el día del evento.
+      </p>
     </div>
   </section>
 
@@ -176,7 +243,6 @@
           </div>
           <div class="swiper-slide">
             <div class="slide-inner">
-              <!-- Cuidado con el typo del archivo original -->
               <img src="images/portda5.jpg" alt="Isabella Galería 3" loading="lazy" />
               <div class="slide-overlay"></div>
             </div>
@@ -189,7 +255,13 @@
           </div>
           <div class="swiper-slide">
             <div class="slide-inner">
-              <img src="images/scroll.jpg" alt="Isabella Galería 5" loading="lazy" />
+              <img src="images/portada2.jpg" alt="Isabella Galería 5" loading="lazy" />
+              <div class="slide-overlay"></div>
+            </div>
+          </div>
+          <div class="swiper-slide">
+            <div class="slide-inner">
+              <img src="images/scroll.jpg" alt="Isabella Galería 6" loading="lazy" />
               <div class="slide-overlay"></div>
             </div>
           </div>
@@ -201,6 +273,13 @@
   </section>
 
   <!-- ========================================= -->
+  <!-- DECORACIÓN FINAL (CASTILLO1.PNG) -->
+  <!-- ========================================= -->
+  <div class="final-decoration fade-up" style="text-align: center; margin-top: 80px; margin-bottom: -60px; position: relative; z-index: 10;">
+    <img src="images/castillo1.png" alt="Castillo Decorativo" style="max-width: 400px; width: 85%; filter: drop-shadow(0 10px 15px rgba(0,0,0,0.1));" loading="lazy" />
+  </div>
+
+  <!-- ========================================= -->
   <!-- SECCIÓN FINAL Y LLAMADOS A LA ACCIÓN -->
   <!-- ========================================= -->
   <section class="actions-section">
@@ -210,7 +289,7 @@
       <div class="actions-overlay"></div>
     </div>
 
-    <div class="container position-relative">
+    <div class="container position-relative" style="padding-top: 60px;">
       <p class="poetic-text text-center fade-up">
         “Tu presencia hará que este sueño sea aún más especial.”
       </p>
@@ -222,7 +301,7 @@
         </button>
 
         <!-- BOTÓN WHATSAPP -->
-        <a href="https://wa.me/573001112233?text=Hola,%20quiero%20confirmar%20mi%20asistencia%20a%20los%2015%20años%20de%20Isabella" target="_blank" class="luxury-btn-solid">
+        <a href="https://wa.me/573217783290?text=Hola,%20quiero%20confirmar%20mi%20asistencia%20a%20los%2015%20años%20de%20Isabella" target="_blank" class="luxury-btn-solid">
           <span>Confirmar Asistencia</span>
         </a>
       </div>
@@ -261,7 +340,8 @@
             <span class="color-name">Negro</span>
           </div>
           <div class="color-item">
-            <div class="color-circle" style="background-color: #046307;"></div>
+            <!-- Verde MUCHÍSIMO más oscuro (verde bosque profundo) -->
+            <div class="color-circle" style="background-color: #001a05; border: 1px solid rgba(255,255,255,0.2);"></div>
             <span class="color-name">Verde Esmeralda</span>
           </div>
           <div class="color-item">

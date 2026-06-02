@@ -23,6 +23,11 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* Clase para bloquear el scroll mientras está la pantalla de bienvenida */
+body.no-scroll {
+  overflow: hidden;
+}
+
 /* ===================================================== */
 /* VARIABLES (LUXURY LAVENDER PALETTE) */
 /* ===================================================== */
@@ -120,6 +125,105 @@ h1, h2, h3, h4, h5, h6, .hero-title, .section-title {
 @keyframes pulseText {
   0%, 100% { opacity: 0.5; filter: blur(2px); }
   50% { opacity: 1; filter: blur(0px); }
+}
+
+/* ===================================================== */
+/* PANTALLA DE BIENVENIDA (MÚSICA & ENTRADA) */
+/* ===================================================== */
+
+.welcome-overlay {
+  position: fixed;
+  inset: 0;
+  background-color: var(--purple-deep);
+  z-index: 9998; /* Justo debajo del preloader */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.8s ease, visibility 0.8s ease;
+}
+
+.welcome-overlay::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at center, rgba(178, 146, 255, 0.15) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+.welcome-overlay.hidden {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.welcome-content {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  color: var(--white);
+  padding: 0 20px;
+  transform: translateY(20px);
+  opacity: 0;
+  animation: floatUpWelcome 1s ease forwards 1s; /* Aparece después del preloader */
+}
+
+.welcome-title {
+  font-size: 4.5rem;
+  margin: 15px 0 35px;
+  color: var(--white);
+  text-shadow: 0 10px 20px rgba(0,0,0,0.5);
+}
+
+@keyframes floatUpWelcome {
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* ===================================================== */
+/* BOTÓN DE MÚSICA FLOTANTE */
+/* ===================================================== */
+
+.music-btn-floating {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  width: 55px;
+  height: 55px;
+  border-radius: 50%;
+  background-color: var(--glass-bg-dark);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255,255,255,0.2);
+  color: var(--white);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+  cursor: pointer;
+  z-index: 999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--transition-smooth);
+  opacity: 0; 
+  visibility: hidden;
+}
+
+.music-btn-floating.visible {
+  opacity: 1;
+  visibility: visible;
+}
+
+.music-btn-floating:hover {
+  transform: scale(1.1);
+  background-color: var(--purple-accent);
+  color: var(--purple-deep);
+}
+
+.music-btn-floating.playing svg {
+  animation: spinSlow 4s linear infinite;
+}
+
+@keyframes spinSlow {
+  100% { transform: rotate(360deg); }
 }
 
 /* ===================================================== */
@@ -287,7 +391,7 @@ section {
 }
 
 /* ===================================================== */
-/* EDITORIAL LAYOUT (Frase + Imagen) */
+/* EDITORIAL LAYOUT & IMAGES */
 /* ===================================================== */
 
 .editorial-grid {
@@ -304,10 +408,9 @@ section {
 .cinematic-img {
   width: 100%;
   height: auto;
-  border-radius: 200px 200px 0 0; /* Toque "arco" muy editorial/elegante */
+  border-radius: 200px 200px 0 0; 
   box-shadow: var(--shadow-elegant);
   object-fit: cover;
-  aspect-ratio: 2/3;
 }
 
 /* ===================================================== */
@@ -380,7 +483,7 @@ section {
 }
 
 /* ===================================================== */
-/* DETALLES Y UBICACIÓN (COMPOSICIÓN ASIMÉTRICA) */
+/* DETALLES Y UBICACIÓN */
 /* ===================================================== */
 
 .details-editorial-wrapper {
@@ -391,8 +494,8 @@ section {
 }
 
 .details-image .cinematic-img {
-  border-radius: 0 150px 0 150px; /* Otro recorte moderno */
-  aspect-ratio: 9/16; /* Fomenta el uso de fotos verticales altas */
+  border-radius: 0 150px 0 150px; 
+  aspect-ratio: 9/16; 
 }
 
 .info-block {
@@ -452,6 +555,15 @@ section {
 }
 
 /* ===================================================== */
+/* SECCIÓN REGALOS (CASTILLO) */
+/* ===================================================== */
+
+.gifts-section {
+  position: relative;
+  z-index: 2;
+}
+
+/* ===================================================== */
 /* GALERÍA CINEMATOGRÁFICA (SWIPER) */
 /* ===================================================== */
 
@@ -472,9 +584,9 @@ section {
 }
 
 .swiper-slide {
-  width: 320px; /* Tamaño base para cards verticales */
+  width: 320px; 
   transition: var(--transition-smooth);
-  opacity: 0.4; /* Opacidad baja para inactivos */
+  opacity: 0.4; 
   transform: scale(0.9);
 }
 
@@ -763,7 +875,7 @@ section {
   }
 
   .details-image {
-    order: -1; /* Mueve la imagen arriba del texto en tablet/móvil */
+    order: -1; 
   }
 
   .details-content {
@@ -779,6 +891,10 @@ section {
   section {
     padding: 80px 0;
   }
+  
+  .welcome-title {
+    font-size: 3.5rem;
+  }
 
   .hero-title {
     font-size: 4rem;
@@ -789,7 +905,7 @@ section {
   }
 
   .poetic-text {
-    font-size: 2.5rem;
+    font-size: 2.5rem !important; 
   }
 
   .section-title {
@@ -807,6 +923,13 @@ section {
 
   .swiper-slide {
     width: 280px;
+  }
+  
+  .music-btn-floating {
+    bottom: 20px;
+    right: 20px;
+    width: 48px;
+    height: 48px;
   }
 
   .buttons-grid {
@@ -842,7 +965,7 @@ section {
   }
 
   .poetic-text {
-    font-size: 2.2rem;
+    font-size: 2rem !important;
   }
 
   .glass-card {
@@ -850,7 +973,7 @@ section {
   }
 
   .countdown-separator {
-    display: none; /* En pantallas muy pequeñas quitamos los ":" para apilar mejor */
+    display: none; 
   }
 
   .countdown-container {
@@ -874,4 +997,4 @@ section {
   .modal-title {
     font-size: 2.2rem;
   }
-}
+}  
